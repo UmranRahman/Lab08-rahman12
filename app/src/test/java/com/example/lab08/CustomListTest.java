@@ -12,4 +12,27 @@ public class CustomListTest {
 
         assertTrue(list.hasCity(calgary));
     }
+
+    @Test
+    void testDeleteException(){
+        CustomList cityList = new CustomList();
+        City city = new City("Yellowknife", "Northwest Territories");
+        cityList.addCity(city);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            cityList.deleteCity(city);
+        });
+    }
+
+    @Test
+    void testCountCities(){
+        CustomList cityList = new CustomList();
+        City city = new City("Yellowknife", "Northwest Territories");
+        cityList.addCity(city);
+        assertEquals(1, cityList.countCities());
+
+        cityList.add(new City("Yellowknife", "Northwest Territories"));
+        cityList.add(new City("Toronto","Ontario"));
+        assertEquals(3, cityList.countCities());
+    }
 }
