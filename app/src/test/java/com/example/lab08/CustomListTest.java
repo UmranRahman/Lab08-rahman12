@@ -14,14 +14,14 @@ public class CustomListTest {
     }
 
     @Test
-    void testDeleteException(){
+    void testDelete(){
         CustomList cityList = new CustomList();
-        City city = new City("Yellowknife", "Northwest Territories");
-        cityList.addCity(city);
-
-        assertThrows(IllegalArgumentException.class, () -> {
-            cityList.deleteCity(city);
-        });
+        City calgary = new City("Calgary","AB");
+        cityList.addCity(calgary);
+        assertTrue(cityList.hasCity(calgary));
+        cityList.deleteCity(calgary);
+        assertFalse(cityList.hasCity(calgary));
+        assertEquals(0, cityList.countCities());
     }
 
     @Test
@@ -31,8 +31,8 @@ public class CustomListTest {
         cityList.addCity(city);
         assertEquals(1, cityList.countCities());
 
-        cityList.add(new City("Yellowknife", "Northwest Territories"));
-        cityList.add(new City("Toronto","Ontario"));
+        cityList.addCity(new City("Yellowknife", "Northwest Territories"));
+        cityList.addCity(new City("Toronto","Ontario"));
         assertEquals(3, cityList.countCities());
     }
 }
